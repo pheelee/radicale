@@ -7,8 +7,9 @@ ENV LOGLEVEL=info
 
 RUN addgroup -g 1000 radicale; adduser -G radicale -u 1000 -D radicale
 
-RUN python3 -m venv /venv; \
-    /venv/bin/pip3 install --upgrade pip radicale
+RUN python3 -m venv /venv
+COPY requirements.txt /venv/requirements.txt
+RUN /venv/bin/pip3 install -r /venv/requirements.txt
 
 COPY rootfs /
 
